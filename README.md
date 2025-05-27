@@ -83,3 +83,78 @@ Tested on **1301 products**:
 - The weights `w_content` and `w_collab` were manually tuned to balance the contribution of each recommendation signal.
 
 - This approach provided greater flexibility to emphasize one model over the other based on domain knowledge and validation performance.
+
+
+
+## Running the Frontend Web Application
+
+The frontend is a Flask-based web application located in the `frontend/` folder of this repository. The main app file is `app.py`.
+
+### Features
+- Product browsing with dynamic recommendations  
+- Product detail pages with customer reviews  
+- Review pages showing all reviews for a product  
+- Advanced content-based recommendation system with MAP metrics  
+- Dynamic extraction of reviews from comma-separated data  
+
+### Setup Instructions
+
+- **Navigate to the frontend folder:**  
+
+  ```bash
+  cd frontend
+
+- **Install Dependencies:**
+
+  ```bash
+  pip install flask pandas numpy nltk scikit-learn wordninja textblob
+
+Download NLTK Components (run in Python shell or script):
+
+import nltk
+
+nltk.download('stopwords')
+
+nltk.download('wordnet')
+
+-**Data Preparation:**
+
+Place amazon.csv dataset file inside the frontend/ folder.
+
+- Generate the similarity matrix and ground truth by running:
+  ```bash
+  python export_similarity_matrix.py
+
+This creates:
+
+cosine_similarity_matrix.pkl (precomputed similarity matrix)
+
+ground_truth.pkl (precomputed recommendation ground truth)
+
+- **Run the Flask Application:**
+  ```bash
+  python app.py
+
+**Access the Application:**
+
+Open http://127.0.0.1:5000/ in your web browser.
+
+**Fronend File Structure:**
+
+app.py — Main Flask application
+
+export_similarity_matrix.py — Script to generate cosine similarity matrix and ground truth
+
+cosine_similarity_matrix.pkl — Precomputed similarity matrix (generated)
+
+ground_truth.pkl — Precomputed recommendation ground truth (generated)
+
+templates/ — HTML templates for the web interface
+
+index.html — Home page
+
+product.html — Product detail page with recommendations and MAP metrics
+
+reviews.html — Page showing all reviews for a product
+
+amazon.csv — Dataset file with product info and reviews
